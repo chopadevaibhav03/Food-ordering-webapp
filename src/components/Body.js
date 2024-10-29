@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPramotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardPramoted = withPramotedLabel(RestaurantCard);
 
   // Whenever state  variables updates, react triggers a reconciliation cycle (re-render the component)
-  console.log("Body rerendered" , listOfRestaurant);
+  console.log("Body rerendered", listOfRestaurant);
 
   useEffect(() => {
     fetchData();
@@ -18,6 +20,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
+      // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4762835&lng=73.7874983&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
@@ -35,9 +38,7 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
 
   if (onlineStatus === false)
-    return (
-   <h1> You are ofline! check your internate connection </h1>
-  );
+    return <h1> You are ofline! check your internate connection </h1>;
 
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
@@ -66,23 +67,32 @@ const Body = () => {
             Search
           </button>
         </div>
-       <div className="search m-4 p-4">
-       <button
-        className="px-4 py-1 bg-gray-200 m-4 rounded-lg"
-          onClick={() => {
-            const filterList = listOfRestaurant.filter((res) => {
-              return res.info.avgRating > 4;
-            });
-            setFilteredRestaurant(filterList);
-          }}
-        >
-          Top Restaurants
-        </button>
-       </div>
+        <div className="search m-4 p-4">
+          <button
+            className="px-4 py-1 bg-gray-200 m-4 rounded-lg"
+            onClick={() => {
+              const filterList = listOfRestaurant.filter((res) => {
+                return res.info.avgRating > 4;
+              });
+              setFilteredRestaurant(filterList);
+            }}
+          >
+            Top Restaurants
+          </button>
+        </div>
       </div>
       <div className="flex flex-wrap ">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            {restaurant.info.promoted ? (
+              <RestaurantCardPramoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
+          </Link>
         ))}
       </div>
     </div>

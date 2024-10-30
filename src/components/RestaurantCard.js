@@ -35,6 +35,7 @@ const RestaurantCard = (props) => {
 
   const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, sla } =
     resData?.info;
+    
 
   // Updated image URL with placeholder fallback
 
@@ -47,7 +48,7 @@ const RestaurantCard = (props) => {
         className="res-logo rounded-lg"
         alt="res-logo"
         src={
-          "https://b.zmtcdn.com/data/pictures/7/20906977/11fdf5b39bd375787aeeba4f660df798_featured_v2.jpg"
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId
         }
       />
 

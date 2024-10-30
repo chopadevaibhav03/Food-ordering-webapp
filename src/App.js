@@ -7,7 +7,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import Restaurantmenu from "./components/RestaurantMenu";
 import { createBrowserRouter,RouterProvider , Outlet } from "react-router-dom";
-// import Grocery from "./components/Grocery";
+import Grocery from "./components/Grocery";
 
 // Chuncking
 // Code Splitting

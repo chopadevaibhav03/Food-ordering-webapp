@@ -7,6 +7,8 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
+  // console.log();
+
   if (resInfo === null) return <Shimmer />;
 
   const {
@@ -16,11 +18,13 @@ const RestaurantMenu = () => {
   } = resInfo?.cards[0]?.card?.card?.card?.info || {};
 
   const {itemCards} =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card
-      ?.card?.itemCards || [];
-      console.log(itemCards);
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
-  // console.log(resInfo?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+      console.log(resInfo?.cards);
+      console.log(resInfo);
+
+      
+  
 
   const categories =
     resInfo?.cards?.[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -29,7 +33,7 @@ const RestaurantMenu = () => {
         "type.googleapis.com/swiggy.gandalf.widgets.v2.TextBoxV2"
     );
 
-  console.log(categories);
+  
 
   return (
     <div className="text-center">

@@ -1,22 +1,22 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import { MENU_API } from "./constants";
 
-const useRestaurantMenu = (resId) => {
-// fetch data
 
-const [resInfo , setResInfo] = useState(null);
-useEffect(() => {
-    fetchData();
-}, []);
+const useRestaurantMenu=(resid)=>{
 
-const fetchData = async () => {
-    const data = await fetch(MENU_API + resId);
+    const [resData,setResData]=useState(null);
 
-    const json = await data.json();
-    setResInfo (json.data);
-}
-    return resInfo;
-}
+    useEffect(()=>{
+        fetchData();
+    },[]);
 
-export default useRestaurantMenu; 
+    const fetchData=async()=>{
+        const data=await fetch(MENU_API+resid);
+        const json=await data.json();
+        setResData(json.data);
+    };
+    return resData;
+
+
+};
+export default useRestaurantMenu;

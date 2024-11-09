@@ -3,35 +3,6 @@ import { IMG_CDN_URL } from "../utils/constants";
 const RestaurantCard = (props) => {
   const { resData } = props;
 
-  //   const {
-  //     cloudinaryImageId,
-  //     name,
-  //     avgRating,
-  //     cuisines,
-  //     costForTwo,
-  //     sla,
-  //   } = resData?.info;
-
-  //   // Determine if the cloudinaryImageId is a full path or just an ID
-  //   const imageUrl = cloudinaryImageId.includes("RX_THUMBNAIL")
-  // ? `https://res.cloudinary.com/swiggy/image/upload/${cloudinaryImageId}`
-  //     : `${IMG_CDN_URL}${cloudinaryImageId}`;
-
-  //   return (
-  //     <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
-  //       <img
-  //         className="res-logo"
-  //         alt="res-logo"
-  //         src={imageUrl}
-  //       />
-  //       <h3>{name}</h3>
-  //       <h4>{cuisines.join(", ")}</h4>
-  //       <h4>{avgRating} stars</h4>
-  //       <h4>{costForTwo}</h4>
-  //       <h4>{sla?.slaString} minutes</h4>
-  //     </div>
-  //   );
-  // };
 
   const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, sla } =
     resData?.info;
@@ -47,8 +18,7 @@ const RestaurantCard = (props) => {
       <img
         className="res-logo rounded-lg"
         alt="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId
+        src={IMG_CDN_URL+cloudinaryImageId
         }
       />
 

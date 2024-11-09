@@ -15,7 +15,7 @@ import Grocery from "./components/Grocery";
 // lazy loading
 // on demand loading
 
-const Grocery = lazy(() => import("./components/Grocery"));
+// const Grocery = lazy(() => import("./components/Grocery"));
 
 
 const AppLayout = () => {

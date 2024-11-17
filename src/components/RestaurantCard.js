@@ -3,10 +3,8 @@ import { IMG_CDN_URL } from "../utils/constants";
 const RestaurantCard = (props) => {
   const { resData } = props;
 
-
   const { cloudinaryImageId, name, avgRating, cuisines, costForTwo, sla } =
     resData?.info;
-    
 
   // Updated image URL with placeholder fallback
 
@@ -18,8 +16,7 @@ const RestaurantCard = (props) => {
       <img
         className="res-logo rounded-lg"
         alt="res-logo"
-        src={IMG_CDN_URL+cloudinaryImageId
-        }
+        src={IMG_CDN_URL + cloudinaryImageId}
       />
 
       <h3 className="font-bold p-4 text-xl">{name}</h3>
@@ -33,6 +30,7 @@ const RestaurantCard = (props) => {
 
 /* Higher order Components 
   - Which meas component take a component and return a component
+  - used to inhance a component 
 */
 
 export const withPramotedLabel = (RestaurantCard) => {

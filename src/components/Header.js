@@ -1,46 +1,46 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [btnNameRact, setBtnNameRact] = useState("Login");
-  const onlineStatus = useOnlineStatus();
+  const [btnname, setBtnname] = useState("Login");
+  const status = useOnlineStatus();
+  const cartItems = useSelector((store) => store.cart.items);
+  //console.log(cartItems);
 
   return (
-    <div className="flex justify-between  bg-pink-100  shadow-lg sm:bg-yellow-100  lg:bg-green-100 ">
-      <div>
-        <div className="logo-container">
-          <img className="w-56 " src={LOGO_URL} />
-        </div>
+    <div className="flex justify-between bg-yellow-100 fixed top-0 left-0 right-0">
+      <div className="items-center">
+        <img className="w-20" src={LOGO_URL} />
       </div>
-      <div className="flex items-center">
-        <ul className="flex p-4 m-4">
-          <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
-          <li className="px-4">
-            <Link to="/">Home</Link>
+      <div className="nav-items">
+        <ul className="flex p-4 m-4 items-center">
+          <li className="px-3">Online Status:{status ? "✅" : "⛔"}</li>
+          <li className="px-3">
+            <Link to={"/"}>Home</Link>
           </li>
-          <li className="px-4">
-            {" "}
-            <Link to="/about">About Us</Link>
+          <li className="px-3">
+            <Link to={"/about"}>About</Link>
           </li>
-          <li className="px-4">
-            <Link to="/contact">Contact us</Link>
+          <li className="px-3">
+            <Link to={"/grocery"}>Grocery</Link>
           </li>
-          <li className="px-4">
-            <Link to="/grocery">Grocery</Link>
+          <li className="px-3">
+            <Link to={"/register"}>Register</Link>
           </li>
-          <li className="px-4">Cart</li>
+          <li className="px-3">
+            <Link to={"/cart"}>Cart-({cartItems.length}items)</Link>
+          </li>
           <button
-            className="login"
+            className="bg-gray-200 p-2 items-center rounded-lg"
             onClick={() => {
-              btnNameRact === "Login"
-                ? setBtnNameRact("Logout")
-                : setBtnNameRact("Login");
+              const userStatus =
+                btnname == "Login" ? setBtnname("Logout") : setBtnname("Login");
             }}
           >
-            {btnNameRact}
+            {btnname}
           </button>
         </ul>
       </div>

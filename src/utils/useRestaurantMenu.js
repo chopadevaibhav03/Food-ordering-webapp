@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react"
-import { MENU_API } from "./constants";
+import { RESURL } from "./constants";
 
 
-const useRestaurantMenu=(resId)=>{
+const useRestaurantMenu=(resid)=>{
 
     const [resData,setResData]=useState(null);
 
-    // console.log("Fetching menu data for restaurant ID:", resId);
-
-
-    useEffect(() => {
+    useEffect(()=>{
         fetchData();
-      }, []);
-      
-      useEffect(() => {
-        // console.log(resData);  // Log resData here to check its structure
-      }, [resData]);
-      
+    },[]);
 
-    const fetchData = async () => {
-        const data = await fetch(MENU_API + resId);
-        const json = await data.json();
-        // console.log(json);  
+    const fetchData=async()=>{
+        const data=await fetch(RESURL+resid);
+        const json=await data.json();
         setResData(json.data);
-      };
+    };
     return resData;
 
 
